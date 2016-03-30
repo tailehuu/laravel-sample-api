@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class PostController extends Controller
+class PostController extends JsonController
 {
     /**
      * Display a listing of the resource.
@@ -15,17 +16,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $posts = Post::orderBy('created_at', 'desc')->get();
+        return $this->responseJson('success', $posts);
     }
 
     /**
@@ -36,7 +28,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = Post::create($request->all());
+        return $this->responseJson('success', $post);
     }
 
     /**
@@ -47,18 +40,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $post = Post::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->responseJson('success', $post);
     }
 
     /**
@@ -70,7 +54,10 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
+
+        return $this->responseJson('success');
     }
 
     /**
@@ -81,6 +68,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::findOrFail($id)->delete();
+
+        $this->responseJson('success');
     }
 }
