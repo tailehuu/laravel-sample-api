@@ -49,9 +49,9 @@ ADMIN_NAME=admin
 ```
 *[Allowing less secure apps to access your account](https://support.google.com/accounts/answer/6010255?hl=en) when using Google SMTP server.*
 
-### Update composer
+### Install composer
 ```
-composer update
+composer install
 ```   
 ### Create tables & dummies data
 ```
@@ -66,18 +66,18 @@ Then development server started on http://localhost:8000. You can use [PostMan](
 ## Usage
 
 
-| Method    | URI                       | Description |
-|:----------|:--------------------------|:-----------|
-| GET/HEAD  | post                      | Get all posts |
-| POST      | post                      | Create a post |
-| PUT/PATCH | post/{post}               | Update a post |
-| DELETE    | post/{post}               | Delete a post |
-| GET/HEAD  | post/{post}               | Show a post |
-| POST      | post/getPostsByTags       | Get posts by tags |
-| POST      | post/{post}/addTagsToPost | Add tags to post |
-| POST      | post/countPostsByTags     | Count posts by tags |
-| GET/HEAD  | tag                       | Get all tags |
-| POST      | tag                       | Create a tag |
-| PUT/PATCH | tag/{tag}                 | Update a tag |
-| GET/HEAD  | tag/{tag}                 | Show a tag |
-| DELETE    | tag/{tag}                 | Delete a tag |
+| Method    | URI                       |  Description  | Request | Response |
+|:----------|:--------------------------|:--------------|:--------|:---------|
+| GET/HEAD  | post                      | Get all posts | ..      | ..       |
+| POST      | post                      | Create a post | ..      | ..       |
+| PUT/PATCH | post/{post}               | Update a post | ..      | ..       |
+| DELETE    | post/{post}               | Delete a post | ..      | ..       |
+| GET/HEAD  | post/{post}               | Show a post   | ..      | ..       |
+| POST      | post/getPostsByTags       | Get posts by tags   | ..      | ..       |
+| POST      | post/{post}/addTagsToPost | Add tags to post    | ..      | ..       |
+| POST      | post/countPostsByTags     | Count posts by tags | ..      | ..       |
+| GET/HEAD  | tag                       | Get all tags  | ..      | ..       |
+| POST      | tag                       | Create a tag  | ..      | ..       |
+| PUT/PATCH | tag/{tag}                 | Update a tag  | ..      | ..       |
+| GET/HEAD  | tag/{tag}                 | Show a tag    | ..      | ..       |
+| DELETE    | tag/{tag}                 | Delete a tag  | ..      | ..       |
