@@ -6,6 +6,7 @@ use App\Post;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends JsonController
 {
@@ -29,6 +30,19 @@ class PostController extends JsonController
     public function store(Request $request)
     {
         $post = Post::create($request->all());
+
+
+
+        // send an email to admin
+        $data = array(
+            'title' => $post->title,
+            'body' => $post->body
+        );
+        Mail::send('emails.createPost', $data, function($message) use ($data)
+        {
+            $message->to(env('ADMIN_EMAIL_ADDRESS'))->subject('Post created');
+        });
+
         return $this->responseJson('success', $post);
     }
 
