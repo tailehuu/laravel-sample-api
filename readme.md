@@ -1,27 +1,54 @@
-# Laravel PHP Framework
+# Sample API
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+This is a repo which provide sample RESTful API to CRUD post & tag. One post has many tags and otherwise.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## Server Requirements
 
-## Official Documentation
+* [Laravel 5.5](https://laravel.com/docs/5.2)
+* [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+* [memcached](http://memcached.org/)
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+## Installation on Mac
+* Clone the source code
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+    cd ~
+    git clone https://github.com/tailehuu/laravel-sample-api.git
+    cd laravel-sample-api
 
-## Security Vulnerabilities
+* Update app's configuration like database info, mail info, memcached... in **.env** file
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+* Update composer
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+    composer update
+    
+* Create tables & dummies data
+
+
+    php artisan migrate:refresh --seed
+* Start server
+
+    
+    php artisan serve
+
+
+## Usage
+
+
+| Method    | URI                       | Name         | Action                                               | Description |
+|:----------|:--------------------------|:-------------|:-----------------------------------------------------|:-----------|
+| GET/HEAD  | post                      | post.index   | App\Http\Controllers\PostController@index            | get all posts |
+| POST      | post                      | post.store   | App\Http\Controllers\PostController@store            | create a post |
+| PUT/PATCH | post/{post}               | post.update  | App\Http\Controllers\PostController@update           | update a post |
+| DELETE    | post/{post}               | post.destroy | App\Http\Controllers\PostController@destroy          | delete a post |
+| GET/HEAD  | post/{post}               | post.show    | App\Http\Controllers\PostController@show             | show a post |
+| POST      | post/getPostsByTags       | ..           | App\Http\Controllers\PostController@getPostsByTags   | get posts by tags |
+| POST      | post/{post}/addTagsToPost | ..           | App\Http\Controllers\PostController@addTagsToPost    | add tags to post |
+| POST      | post/countPostsByTags     | ..           | App\Http\Controllers\PostController@countPostsByTags | count posts by tags |
+| GET/HEAD  | tag                       | tag.index    | App\Http\Controllers\TagController@index             | get all tags |
+| POST      | tag                       | tag.store    | App\Http\Controllers\TagController@store             | create a tag |
+| PUT/PATCH | tag/{tag}                 | tag.update   | App\Http\Controllers\TagController@update            | update a tag |
+| GET/HEAD  | tag/{tag}                 | tag.show     | App\Http\Controllers\TagController@show              | show a tag |
+| DELETE    | tag/{tag}                 | tag.destroy  | App\Http\Controllers\TagController@destroy           | delete a tag |
