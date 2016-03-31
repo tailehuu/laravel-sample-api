@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class WelcomeController extends JsonController
+class WelcomeController extends Controller
 {
     public function index()
     {
         $tags_id = [3, 7];
         $posts = Post::getPostsByTags($tags_id);
 
-        return $this->responseJson('success', $posts);
+        return view('welcome');
     }
 }
