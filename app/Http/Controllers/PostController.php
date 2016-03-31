@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\PostTag;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -83,6 +84,28 @@ class PostController extends JsonController
         Post::findOrFail($id)->delete();
         Log::info('Deleted post id ' . $id);
         $this->responseJson('success');
+    }
+
+    /**
+     * Add tag or tags to post.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addTagsToPost(Request $request, $id) {
+        $tags_id = $request->get('tags_id');
+        foreach($tags_id as $tag_id) {
+            // check tag is exist
+            if(PostTag::where('post_id', $id)->where('tag_id', $tag_id)->count() == 0) {
+                $postTag = new PostTag();
+                $postTag->post_id = $id;
+                $postTag->tag_id = $tag_id;
+                $postTag->save();
+            }
+        }
+        $post = Post::findOrFail($id)->load('tags');
+
+        return $this->responseJson('success', $post);
     }
 
     /**

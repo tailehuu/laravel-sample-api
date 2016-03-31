@@ -13,6 +13,9 @@
 
 Route::get('/', ['uses' => 'WelcomeController@index']);
 
+Route::group(['prefix' => 'post/{post}'], function () {
+    Route::post('addTagsToPost', 'PostController@addTagsToPost');
+});
 Route::post('post/getPostsByTags', 'PostController@getPostsByTags');
 Route::post('post/countPostsByTags', 'PostController@countPostsByTags');
 Route::resource('post', 'PostController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
