@@ -47,6 +47,8 @@ MAIL_ENCRYPTION=tls
 ADMIN_EMAIL_ADDRESS=admin@example.com
 ADMIN_NAME=admin
 ```
+*[Allowing less secure apps to access your account](https://support.google.com/accounts/answer/6010255?hl=en) when using Google SMTP server.*
+
 ### Update composer
 ```
 composer update
