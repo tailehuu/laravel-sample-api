@@ -58,6 +58,8 @@ php artisan migrate:refresh --seed
 ```
 php artisan serve
 ```
+Then development server started on http://localhost:8000. You can use [PostMan](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en) to test it out. 
+
 ## Usage
 
 
