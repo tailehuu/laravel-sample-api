@@ -14,6 +14,7 @@ This is a repo which provide sample RESTful API to CRUD post & tag. One post has
 cd ~
 git clone https://github.com/tailehuu/laravel-sample-api.git
 cd laravel-sample-api
+chmod -R 777 storage/
 ```
 ### Update app's configuration in __.env__ file
 ```
@@ -65,16 +66,16 @@ Then development server started on http://localhost:8000. You can use [PostMan](
 
 | Method    | URI                       | Description |
 |:----------|:--------------------------|:-----------|
-| GET/HEAD  | post                      | get all posts |
-| POST      | post                      | create a post |
-| PUT/PATCH | post/{post}               | update a post |
-| DELETE    | post/{post}               | delete a post |
-| GET/HEAD  | post/{post}               | show a post |
-| POST      | post/getPostsByTags       | get posts by tags |
-| POST      | post/{post}/addTagsToPost | add tags to post |
-| POST      | post/countPostsByTags     | count posts by tags |
-| GET/HEAD  | tag                       | get all tags |
-| POST      | tag                       | create a tag |
-| PUT/PATCH | tag/{tag}                 | update a tag |
-| GET/HEAD  | tag/{tag}                 | show a tag |
-| DELETE    | tag/{tag}                 | delete a tag |
+| GET/HEAD  | post                      | Get all posts |
+| POST      | post                      | Create a post |
+| PUT/PATCH | post/{post}               | Update a post |
+| DELETE    | post/{post}               | Delete a post |
+| GET/HEAD  | post/{post}               | Show a post |
+| POST      | post/getPostsByTags       | Get posts by tags |
+| POST      | post/{post}/addTagsToPost | Add tags to post |
+| POST      | post/countPostsByTags     | Count posts by tags |
+| GET/HEAD  | tag                       | Get all tags |
+| POST      | tag                       | Create a tag |
+| PUT/PATCH | tag/{tag}                 | Update a tag |
+| GET/HEAD  | tag/{tag}                 | Show a tag |
+| DELETE    | tag/{tag}                 | Delete a tag |
