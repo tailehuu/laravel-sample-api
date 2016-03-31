@@ -7,6 +7,7 @@ use App\PostTag;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Log;
 use Illuminate\Support\Facades\Mail;
 
 class PostController extends JsonController
