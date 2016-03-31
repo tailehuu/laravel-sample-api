@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class TagController extends Controller
+class TagController extends JsonController
 {
     /**
      * Display a listing of the resource.
@@ -15,17 +16,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $tags = Tag::orderBy('created_at', 'desc')->get();
+        return $this->responseJson('success', $tags);
     }
 
     /**
@@ -36,7 +28,8 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tag = Tag::create($request->all());
+        return $this->responseJson('success', $tag);
     }
 
     /**
@@ -47,18 +40,8 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $tag = Tag::findOrFail($id);
+        return $this->responseJson('success', $tag);
     }
 
     /**
@@ -70,7 +53,9 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        $tag->update($request->all());
+        return $this->responseJson('success');
     }
 
     /**
@@ -81,6 +66,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Tag::findOrFail($id)->delete();
+        $this->responseJson('success');
     }
 }

@@ -41,7 +41,6 @@ class PostController extends JsonController
     public function show($id)
     {
         $post = Post::findOrFail($id);
-
         return $this->responseJson('success', $post);
     }
 
@@ -56,7 +55,6 @@ class PostController extends JsonController
     {
         $post = Post::findOrFail($id);
         $post->update($request->all());
-
         return $this->responseJson('success');
     }
 
@@ -69,7 +67,6 @@ class PostController extends JsonController
     public function destroy($id)
     {
         Post::findOrFail($id)->delete();
-
         $this->responseJson('success');
     }
 }

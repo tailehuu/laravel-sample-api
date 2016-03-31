@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::resource('post', 'PostController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+Route::resource('tag', 'TagController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
