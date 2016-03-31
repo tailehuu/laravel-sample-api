@@ -15,7 +15,7 @@ cd ~
 git clone https://github.com/tailehuu/laravel-sample-api.git
 cd laravel-sample-api
 ```
-### Update app's configuration like database info, mail info, memcached... in **.env** file
+### Update app's configuration in __.env__ file
 ```
 ...
 DB_CONNECTION=mysql
@@ -61,18 +61,18 @@ php artisan serve
 ## Usage
 
 
-| Method    | URI                       | Name         | Action                                               | Description |
-|:----------|:--------------------------|:-------------|:-----------------------------------------------------|:-----------|
-| GET/HEAD  | post                      | post.index   | App\Http\Controllers\PostController@index            | get all posts |
-| POST      | post                      | post.store   | App\Http\Controllers\PostController@store            | create a post |
-| PUT/PATCH | post/{post}               | post.update  | App\Http\Controllers\PostController@update           | update a post |
-| DELETE    | post/{post}               | post.destroy | App\Http\Controllers\PostController@destroy          | delete a post |
-| GET/HEAD  | post/{post}               | post.show    | App\Http\Controllers\PostController@show             | show a post |
-| POST      | post/getPostsByTags       | ..           | App\Http\Controllers\PostController@getPostsByTags   | get posts by tags |
-| POST      | post/{post}/addTagsToPost | ..           | App\Http\Controllers\PostController@addTagsToPost    | add tags to post |
-| POST      | post/countPostsByTags     | ..           | App\Http\Controllers\PostController@countPostsByTags | count posts by tags |
-| GET/HEAD  | tag                       | tag.index    | App\Http\Controllers\TagController@index             | get all tags |
-| POST      | tag                       | tag.store    | App\Http\Controllers\TagController@store             | create a tag |
-| PUT/PATCH | tag/{tag}                 | tag.update   | App\Http\Controllers\TagController@update            | update a tag |
-| GET/HEAD  | tag/{tag}                 | tag.show     | App\Http\Controllers\TagController@show              | show a tag |
-| DELETE    | tag/{tag}                 | tag.destroy  | App\Http\Controllers\TagController@destroy           | delete a tag |
+| Method    | URI                       | Description |
+|:----------|:--------------------------|:-----------|
+| GET/HEAD  | post                      | get all posts |
+| POST      | post                      | create a post |
+| PUT/PATCH | post/{post}               | update a post |
+| DELETE    | post/{post}               | delete a post |
+| GET/HEAD  | post/{post}               | show a post |
+| POST      | post/getPostsByTags       | get posts by tags |
+| POST      | post/{post}/addTagsToPost | add tags to post |
+| POST      | post/countPostsByTags     | count posts by tags |
+| GET/HEAD  | tag                       | get all tags |
+| POST      | tag                       | create a tag |
+| PUT/PATCH | tag/{tag}                 | update a tag |
+| GET/HEAD  | tag/{tag}                 | show a tag |
+| DELETE    | tag/{tag}                 | delete a tag |
