@@ -2,12 +2,13 @@
 
 namespace App\Exceptions;
 
+use App\Http\Controllers\JsonController;
 use Exception;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -17,10 +18,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        AuthorizationException::class,
         HttpException::class,
-        ModelNotFoundException::class,
-        ValidationException::class,
     ];
 
     /**
@@ -45,6 +43,18 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof ModelNotFoundException) {
+            return JsonController::responseJson('error', $e->getMessage());
+        }
+
+        if ($e instanceof MethodNotAllowedHttpException) {
+            return JsonController::responseJson('error', 'Method not allowed.');
+        }
+
+        if ($e instanceof QueryException) {
+            return JsonController::responseJson('error', 'Invalid query.');
+        }
+
         return parent::render($request, $e);
     }
 }
