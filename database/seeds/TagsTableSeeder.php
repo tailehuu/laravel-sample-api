@@ -27,6 +27,21 @@ class TagsTableSeeder extends Seeder
             ),
             array(
                 'name'=>'Java',
+            ),
+            array(
+                'name'=>'Python',
+            ),
+            array(
+                'name'=>'Ruby on Rails',
+            ),
+            array(
+                'name'=>'AngularJS',
+            ),
+            array(
+                'name'=>'NodeJS',
+            ),
+            array(
+                'name'=>'Meteor',
             )
         );
         foreach ($tags as $t) {

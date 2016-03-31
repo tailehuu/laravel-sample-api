@@ -14,7 +14,7 @@ class JsonController extends Controller
      * @param  String  $status
      * @param  Array  $data
      * @param  int  $code
-     * @return JSON
+     * @return \Illuminate\Http\JsonResponse
      */
     public static function responseJson($status, $data = null, $code = 200)
     {

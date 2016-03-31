@@ -12,7 +12,7 @@ class PostController extends JsonController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -24,7 +24,7 @@ class PostController extends JsonController
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -36,7 +36,7 @@ class PostController extends JsonController
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
@@ -49,7 +49,7 @@ class PostController extends JsonController
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
     {
@@ -62,11 +62,36 @@ class PostController extends JsonController
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
         Post::findOrFail($id)->delete();
+        Log::info('Deleted post id ' . $id);
         $this->responseJson('success');
+    }
+
+    /**
+     * Get posts by tag or tags.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getPostsByTags(Request $request) {
+        $tags_id = $request->get('tags_id');
+        $posts = Post::getPostsByTags($tags_id);
+        return $this->responseJson('success', $posts);
+    }
+
+    /**
+     * Count posts by tag or tags.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function countPostsByTags(Request $request) {
+        $tags_id = $request->get('tags_id');
+        $posts = Post::getPostsByTags($tags_id);
+        return $this->responseJson('success', count($posts));
     }
 }

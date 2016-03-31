@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['uses' => 'WelcomeController@index']);
 
+Route::post('post/getPostsByTags', 'PostController@getPostsByTags');
+Route::post('post/countPostsByTags', 'PostController@countPostsByTags');
 Route::resource('post', 'PostController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+
 Route::resource('tag', 'TagController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
