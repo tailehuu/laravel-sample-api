@@ -7,6 +7,7 @@ use App\PostTag;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Cache;
 use Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -19,7 +20,11 @@ class PostController extends JsonController
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->get();
+        // get from cache if exist
+        $posts = Cache::rememberForever('posts', function () {
+            return Post::orderBy('created_at', 'desc')->get();
+        });
+
         return $this->responseJson('success', $posts);
     }
 
@@ -33,8 +38,6 @@ class PostController extends JsonController
     {
         $post = Post::create($request->all());
 
-
-
         // send an email to admin
         $data = array(
             'title' => $post->title,
@@ -44,6 +47,9 @@ class PostController extends JsonController
         {
             $message->to(env('ADMIN_EMAIL_ADDRESS'))->subject('Post created');
         });
+
+        // remove posts from cache
+        Cache::forget('posts');
 
         return $this->responseJson('success', $post);
     }
@@ -71,6 +77,10 @@ class PostController extends JsonController
     {
         $post = Post::findOrFail($id);
         $post->update($request->all());
+
+        // remove posts from cache
+        Cache::forget('posts');
+
         return $this->responseJson('success');
     }
 
@@ -83,7 +93,13 @@ class PostController extends JsonController
     public function destroy($id)
     {
         Post::findOrFail($id)->delete();
+
+        // write log
         Log::info('Deleted post id ' . $id);
+
+        // remove posts from cache
+        Cache::forget('posts');
+
         $this->responseJson('success');
     }
 

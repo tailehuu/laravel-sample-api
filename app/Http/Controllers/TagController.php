@@ -7,6 +7,7 @@ use App\Tag;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class TagController extends JsonController
@@ -18,7 +19,11 @@ class TagController extends JsonController
      */
     public function index()
     {
-        $tags = Tag::orderBy('created_at', 'desc')->get();
+        // get from cache if exist
+        $tags = Cache::rememberForever('tags', function () {
+            return Tag::orderBy('created_at', 'desc')->get();
+        });
+
         return $this->responseJson('success', $tags);
     }
 
@@ -31,6 +36,10 @@ class TagController extends JsonController
     public function store(Request $request)
     {
         $tag = Tag::create($request->all());
+
+        // remove tags from cache
+        Cache::forget('tags');
+
         return $this->responseJson('success', $tag);
     }
 
@@ -57,6 +66,10 @@ class TagController extends JsonController
     {
         $tag = Tag::findOrFail($id);
         $tag->update($request->all());
+
+        // remove tags from cache
+        Cache::forget('tags');
+
         return $this->responseJson('success');
     }
 
@@ -69,6 +82,10 @@ class TagController extends JsonController
     public function destroy($id)
     {
         Tag::findOrFail($id)->delete();
+
+        // remove tags from cache
+        Cache::forget('tags');
+
         $this->responseJson('success');
     }
 }
