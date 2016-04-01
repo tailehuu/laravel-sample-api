@@ -57,6 +57,10 @@ composer install
 ```
 php artisan migrate:refresh --seed
 ```
+### Testing
+```
+phpunit
+```
 ### Start server
 ```
 php artisan serve
@@ -66,18 +70,28 @@ Then development server started on http://localhost:8000. You can use [PostMan](
 ## Usage
 
 
-| Method    | URI                       |  Description  | Request | Response |
-|:----------|:--------------------------|:--------------|:--------|:---------|
-| GET/HEAD  | post                      | Get all posts | ..      | ..       |
-| POST      | post                      | Create a post | ..      | ..       |
-| PUT/PATCH | post/{post}               | Update a post | ..      | ..       |
-| DELETE    | post/{post}               | Delete a post | ..      | ..       |
-| GET/HEAD  | post/{post}               | Show a post   | ..      | ..       |
-| POST      | post/getPostsByTags       | Get posts by tags   | ..      | ..       |
-| POST      | post/{post}/addTagsToPost | Add tags to post    | ..      | ..       |
-| POST      | post/countPostsByTags     | Count posts by tags | ..      | ..       |
-| GET/HEAD  | tag                       | Get all tags  | ..      | ..       |
-| POST      | tag                       | Create a tag  | ..      | ..       |
-| PUT/PATCH | tag/{tag}                 | Update a tag  | ..      | ..       |
-| GET/HEAD  | tag/{tag}                 | Show a tag    | ..      | ..       |
-| DELETE    | tag/{tag}                 | Delete a tag  | ..      | ..       |
+| Method    | URI                       |  Description  |
+|:----------|:--------------------------|:--------------|
+| GET/HEAD  | post                      | Get all posts |
+| POST      | post                      | Create a post |
+| PUT/PATCH | post/{post}               | Update a post |
+| DELETE    | post/{post}               | Delete a post |
+| GET/HEAD  | post/{post}               | Show a post   |
+| POST      | post/getPostsByTags       | Get posts by tags   |
+| POST      | post/{post}/addTagsToPost | Add tags to post    |
+| POST      | post/countPostsByTags     | Count posts by tags |
+| GET/HEAD  | tag                       | Get all tags  |
+| POST      | tag                       | Create a tag  |
+| PUT/PATCH | tag/{tag}                 | Update a tag  |
+| GET/HEAD  | tag/{tag}                 | Show a tag    |
+| DELETE    | tag/{tag}                 | Delete a tag  |
+
+For getPostsByTags, addTagsToPost & countPostsByTags, we require **'tags_id[]'** is the name param.
+
+Example:
+```
+# get posts
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8000/post
+# create post
+curl -X POST -H "Content-Type: application/json" -d '{"title":"xyz”,"body":"xyz”}' http://localhost:8000/post
+```
